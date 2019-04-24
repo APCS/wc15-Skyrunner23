@@ -30,8 +30,8 @@ public class WC15
    */
   public static String centralThree(String letters)
   {
-    //TODO: Finish
-    return "no";
+    return letters.substring(letters.length() / 2 - 1,
+      letters.length() / 2 + 2);
   }
 
   /**
@@ -51,8 +51,22 @@ public class WC15
    */
   public static String chopFront(String str)
   {
-    //TODO: Finish
-    return "no";
+    String answer = "";
+    // If the 1st character is a, add it in
+    if (str.substring(0, 1).equals("a"))
+    {
+      answer += "a";
+      // if the 1st char isn't a, it won't do anything, which effectively
+      // removes the character from answer
+    }
+    // same thing for the 2nd char
+    if (str.substring(1, 2).equals("b"))
+    {
+      answer += "b";
+    }
+    // then just paste in the rest
+    answer += str.substring(2);
+    return answer;
   }
 
   /**
@@ -72,8 +86,19 @@ public class WC15
    */
   public static String hateX(String str)
   {
-    //TODO: Finish
-    return "no";
+    String answer = "";
+    // this is the same as chopFront but inverted, it only adds them in if they
+    // aren't the target character
+    if (!str.substring(0, 1).equals("x"))
+    {
+      answer += str.substring(0, 1);
+    }
+    if (!str.substring(1, 2).equals("x"))
+    {
+      answer += str.substring(1, 2);
+    }
+    answer += str.substring(2);
+    return answer;
   }
 
   /**
@@ -88,7 +113,9 @@ public class WC15
    */
   public static void swapRows(int[][] mat, int rowAIndex, int rowBIndex)
   {
-    //TODO: Finish
+    int[] temp = mat[rowAIndex];
+    mat[rowAIndex] = mat[rowBIndex];
+    mat[rowBIndex] = temp;
   }
 
   /**
@@ -103,7 +130,24 @@ public class WC15
    */
   public static void swapColumns(int[][] mat, int colAIndex, int colBIndex)
   {
-    //TODO: Finish
+    int[] temp = new int[mat[0].length];
+    // since columns aren't actually arrays, but indexes of 1D arrays, we have
+    // to make a loop to find all the items at that index (or column) for each
+    // of
+    // the arrays
+    for (int i = 0; i < mat.length; i++)
+    {
+      temp[i] = mat[i][colAIndex];
+    }
+    // otherwise it's the same principle as swapRows
+    for (int i = 0; i < mat.length; i++)
+    {
+      mat[i][colAIndex] = mat[i][colBIndex];
+    }
+    for (int i = 0; i < mat.length; i++)
+    {
+      mat[i][colBIndex] = temp[i];
+    }
   }
 
   /**
@@ -122,8 +166,33 @@ public class WC15
    */
   public static String[][] fill2DWithLetters(String str, int rows, int cols)
   {
-    //TODO: Finish
-    return new String[][] {{"42"}};
+    String[][] answer = new String[rows][cols];
+    int index = 0;
+    if (str.length() > rows * cols)
+    {
+      // paste in characters from str until you run out of answer space
+      for (int r = 0; r < rows && index < str.length(); r++)
+      {
+        for (int c = 0; c < cols && index < str.length(); c++)
+        {
+          answer[r][c] = str.substring(index, index + 1);
+          index++;
+        }
+      }
+    }
+    else
+    {
+      // paste in characters from str until you run out of str space
+      for (int r = 0; r < rows && index < str.length(); r++)
+      {
+        for (int c = 0; c < cols && index < str.length(); c++)
+        {
+          answer[r][c] = str.substring(index, index + 1);
+          index++;
+        }
+      }
+    }
+    return answer;
   }
 
   /**
@@ -155,8 +224,28 @@ public class WC15
    */
   public static int[][] fillDownAndUp(int[] vals, int rows, int cols)
   {
-    //TODO: Finish
-    return new int[][] {{42}};
+    int[][] answer = new int[rows][cols];
+    int index = 0; // this is to keep track of where we are in vals
+    for (int c = 0; c < cols && index < vals.length; c++)
+    {
+      for (int r = 0; r < rows && index < vals.length; r++)
+      {
+        // go down
+        answer[r][c] = vals[index];
+        index++;
+      }
+      c++; // go on to the next column before going back up
+      if (c < cols)
+      {
+        for (int r = rows - 1; r >= 0 && index < vals.length; r--)
+        {
+          // and back up
+          answer[r][c] = vals[index];
+          index++;
+        }
+      }
+    }
+    return answer;
   }
 
   /**
@@ -189,10 +278,24 @@ public class WC15
    * @return a smaller array containing the specified elements
    */
   public static int[][] crop2D(int[][] mat, int startRow, int startCol,
-      int endRow, int endCol)
+    int endRow, int endCol)
   {
-    //TODO: Finish
-    return new int[][] {{42}};
+    int[][] answer = new int[endRow - startRow + 1][endCol - startCol + 1];
+    // go through the mat array as though it was a normal array, but use start
+    // and end instead of 0 and mat.length
+    int answerR = 0, answerC = 0;
+    // we will need ^^ separate indexes for the smaller answer array
+    // we wouldn't if it was an ArrayList
+    for (int r = startRow + 1; r < endRow; r++)
+    {
+      for (int c = startCol + 1; c < endCol; c++)
+      {
+        answer[answerR][answerC] = mat[r][c];
+        answerR++;
+        answerC++;
+      }
+    }
+    return answer;
   }
 
 }
