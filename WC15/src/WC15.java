@@ -133,8 +133,7 @@ public class WC15
     int[] temp = new int[mat[0].length];
     // since columns aren't actually arrays, but indexes of 1D arrays, we have
     // to make a loop to find all the items at that index (or column) for each
-    // of
-    // the arrays
+    // of the arrays
     for (int i = 0; i < mat.length; i++)
     {
       temp[i] = mat[i][colAIndex];
@@ -286,9 +285,9 @@ public class WC15
     int answerR = 0, answerC = 0;
     // we will need ^^ separate indexes for the smaller answer array
     // we wouldn't if it was an ArrayList
-    for (int r = startRow + 1; r < endRow; r++)
+    for (int r = startRow + 1; r < endRow + 1; r++)
     {
-      for (int c = startCol + 1; c < endCol; c++)
+      for (int c = startCol + 1; c < endCol + 1; c++)
       {
         answer[answerR][answerC] = mat[r][c];
         answerR++;
@@ -297,5 +296,4 @@ public class WC15
     }
     return answer;
   }
-
 }
