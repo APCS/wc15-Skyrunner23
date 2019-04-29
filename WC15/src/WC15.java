@@ -285,14 +285,14 @@ public class WC15
     int answerR = 0, answerC = 0;
     // we will need ^^ separate indexes for the smaller answer array
     // we wouldn't if it was an ArrayList
-    for (int r = startRow + 1; r < endRow + 1; r++)
+    for (int r = startRow; r < endRow && answerR < answer.length; r++)
     {
-      for (int c = startCol + 1; c < endCol + 1; c++)
+      for (int c = startCol; c < endCol && answerC < answer[0].length; c++)
       {
         answer[answerR][answerC] = mat[r][c];
-        answerR++;
         answerC++;
       }
+      answerR++;
     }
     return answer;
   }
