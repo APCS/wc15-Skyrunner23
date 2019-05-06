@@ -31,7 +31,7 @@ public class WC15
   public static String centralThree(String letters)
   {
     return letters.substring(letters.length() / 2 - 1,
-      letters.length() / 2 + 2);
+        letters.length() / 2 + 2);
   }
 
   /**
@@ -277,7 +277,7 @@ public class WC15
    * @return a smaller array containing the specified elements
    */
   public static int[][] crop2D(int[][] mat, int startRow, int startCol,
-    int endRow, int endCol)
+      int endRow, int endCol)
   {
     int[][] answer = new int[endRow - startRow + 1][endCol - startCol + 1];
     // go through the mat array as though it was a normal array, but use start
